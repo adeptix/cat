@@ -57,6 +57,7 @@ video {
     align-items: flex-start;
     margin-top: 1.5em;
     position: relative;
+    margin-bottom: 1em;
 }
 
 .news__comment_add textarea {
@@ -81,4 +82,13 @@ video {
 }
 .news__comment_add button:active {
     background-color: rgb(241, 136, 124);
+}
+
+.comment_text {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: 1px solid black;
+    box-sizing: border-box;
 }
