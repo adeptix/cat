@@ -29,6 +29,11 @@ function restoreComments() {
 
 function addComment() {
     let text = textArea.value
+
+    if (text === "") {
+        return
+    }
+
     drawComment(text)
     saveComment(text)
     textArea.value = ''
