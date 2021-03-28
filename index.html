@@ -7,24 +7,43 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-    <div class="wrapper">
-        <h1 id="news__title">
-            Spin IT Breaking News
-        </h1>
-        <video width="400" height="300" controls="controls" src="./assets/cat.mp4"></video>
-        <p class="news__brief">
-            Коту Пуське сегодня вставать в 6 часов утра &#128561;! Скорее оставьте ему слова поддержки &#129392;.
-        </p>
+<div class="wrapper">
+    <h1 id="news__title">
+        Spin IT Breaking News
+    </h1>
+    <video width="400" height="300" controls="controls" src="./assets/cat.mp4"></video>
+    <p class="news__brief">
+        Коту Пуське сегодня вставать в 6 часов утра &#128561;! Скорее оставьте ему слова поддержки &#129392;.
+    </p>
 
-        <div class="news__comment_add">
-            <textarea name="" id="comment_add_area" rows="5" placeholder="Ваш комментарий"></textarea>
-            <button>
-                Добавить
-            </button>
-        </div>
-
+    <div class="news__comment_add">
+        <textarea name="" id="comment_add_area" rows="5" placeholder="Ваш комментарий"></textarea>
+        <button>
+            Добавить
+        </button>
     </div>
 
-    <script src="main.js"></script>
+</div>
+
+
+<template id="comment_tmpl">
+    <div class="comment_card">
+        <div>
+        <div class="test">
+            <span id="comment_author"></span>
+            <span>&#9757</span>
+            <span id="comment_created_at"></span>
+        </div>
+        <div id="comment_text"></div>
+    </div>
+        <div>
+            aaaaa
+        </div>
+        <div>
+            bbbb
+        </div>
+    </div>
+</template>
+<script src="main.js"></script>
 </body>
 </html>

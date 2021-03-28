@@ -41,6 +41,7 @@ video {
     margin: 0.6em 0 0.7em;
     position: relative;
 }
+
 .news__brief::after {
     position: absolute;
     content: '';
@@ -67,6 +68,7 @@ video {
     padding: 1em;
     box-sizing: border-box;
 }
+
 .news__comment_add button {
     max-width: 200px;
     border: none;
@@ -77,18 +79,42 @@ video {
     outline: none;
     cursor: pointer;
 }
+
 .news__comment_add button:hover {
     background-color: rgb(241, 153, 143);
 }
+
 .news__comment_add button:active {
     background-color: rgb(241, 136, 124);
 }
 
-.comment_text {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px 20px;
-    margin-top: 10px;
-    border: 1px solid black;
-    box-sizing: border-box;
+#comment_author {
+    color: red;
 }
+
+#comment_created_at {
+    color: blue;
+}
+
+#comment_text {
+    float: left;
+    width: 100%;
+    position: relative;
+    padding: 0.5em;
+}
+
+.comment_card {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.comment_card span {
+    float: left;
+    padding: 0.5em;
+}
+
+.test {
+    width: 100%;
+    position: relative;
+}
+

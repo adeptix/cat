@@ -1,31 +1,79 @@
-// кажется тут должен быть код...
+const commentZone = document.querySelector('.wrapper')
 
-// Подсказка №1: Содержимое тега textarea хранится в его свойстве value
+const templateComm = document.querySelector('#comment_tmpl').content
+const authorSpan = templateComm.querySelector("#comment_author")
+const createdAtSpan = templateComm.querySelector("#comment_created_at")
+const commentDiv = templateComm.querySelector("#comment_text")
 
-// Подсказка №2: Не забывайте, что LocalStorage и SessionStorage могут хранить только строки в виде пар ключ/значение
+class Comment {
+    constructor(text, author, createdAt) {
+        this.text = text
+        this.author = author
+        this.createdAt = createdAt
+    }
+
+    show() {
+        authorSpan.textContent = this.author
+        createdAtSpan.textContent = this.createdAt
+        commentDiv.textContent = this.text
+
+        let cmt = templateComm.cloneNode(true);
+        commentZone.append(cmt)
+    }
+
+    edit() {
+
+    }
+
+    delete() {
+
+    }
+}
 
 const COM_KEY = 'comments'
 
-let textArea = document.getElementById('comment_add_area')
-let button = document.querySelector('button')
-let commentZone = document.querySelector('.wrapper')
-let commentsJson = localStorage.getItem(COM_KEY)
+class Store {
+    savedComments = []
+
+    constructor() {
+        console.log(COM_KEY)
+
+        let savedComments = JSON.parse(localStorage.getItem(COM_KEY))
+        if (savedComments != null) {
+            savedComments.forEach(sc => this.savedComments.push(new Comment(sc.text, sc.author, sc.createdAt)))
+        }
+    }
+
+    get savedComments() {
+        return this.savedComments
+    }
+
+    restoreComments() {
+        this.savedComments.forEach(c => c.show())
+    }
+
+    edit() {
+
+    }
+
+    add(comment) {
+        this.savedComments.push(comment)
+        console.log(this.savedComments.type)
+        localStorage.setItem(COM_KEY, JSON.stringify(this.savedComments))
+    }
+
+    delete() {
+
+    }
+}
+
+const textArea = document.getElementById('comment_add_area')
+const button = document.querySelector('button')
 
 button.addEventListener('click', addComment)
 
-restoreComments()
-
-function restoreComments() {
-    let commentsArray = JSON.parse(commentsJson)
-
-    if (commentsArray == null) {
-        return
-    }
-
-    commentsArray.forEach(function (item) {
-        drawComment(item)
-    })
-}
+const store = new Store()
+store.restoreComments()
 
 function addComment() {
     let text = textArea.value
@@ -34,29 +82,11 @@ function addComment() {
         return
     }
 
-    drawComment(text)
-    saveComment(text)
+    let now = new Date();
+    let comment = new Comment(text, 'me', now)
+    comment.show()
+    store.add(comment)
+
     textArea.value = ''
-}
-
-function drawComment(text) {
-    let comment = document.createElement('div')
-    comment.classList.add('comment_text')
-    comment.innerText = text
-
-    commentZone.append(comment)
-}
-
-function saveComment(text) {
-    let commentsArray = JSON.parse(commentsJson)
-
-    if (commentsArray == null) {
-        commentsArray = []
-    }
-
-    commentsArray.push(text)
-
-    commentsJson = JSON.stringify(commentsArray)
-    localStorage.setItem(COM_KEY, commentsJson)
 }
 
