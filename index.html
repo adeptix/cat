@@ -27,23 +27,20 @@
 
 
 <template id="comment_tmpl">
-    <div class="comment_card">
-        <div>
-        <div class="test">
-            <span id="comment_author"></span>
+    <li class="comment_post">
+        <div class="comment_header">
+            <span class="comment_author"></span>
             <span>&#9757</span>
-            <span id="comment_created_at"></span>
+            <span class="comment_created_at"></span>
         </div>
-        <div id="comment_text"></div>
-    </div>
-        <div>
-            aaaaa
+        <div class="comment_text"></div>
+        <div class="comment_footer">
+            <span class="comment_footer_edit">Редактировать</span>
+            <span class="comment_footer_delete">Удалить</span>
         </div>
-        <div>
-            bbbb
-        </div>
-    </div>
+    </li>
 </template>
+
 <script src="main.js"></script>
 </body>
 </html>

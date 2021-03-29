@@ -88,33 +88,59 @@ video {
     background-color: rgb(241, 136, 124);
 }
 
-#comment_author {
-    color: red;
+.comment_author {
+    color: blue;
+    font-weight: 700;
 }
 
-#comment_created_at {
+.comment_created_at {
+    color: dimgrey;
+}
+
+.comment_text {
+    font-size: 15px;
+    padding: 5px 0
+}
+
+.comment_post {
+    clear: both;
+    box-sizing: border-box;
+    list-style-type: none;
+    width: 100%;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.comment_header {
+    line-height: 1;
+    font-size: 15px;
+    padding-right: 46px;
+    margin-bottom: 3px;
+}
+
+.comment_footer {
+    margin-top: 5px;
+    line-height: 1;
+    font-size: 10px;
+    margin-bottom: 3px;
+    color: dimgrey;
+
+}
+
+.comment_footer_edit {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.comment_footer_edit:hover {
     color: blue;
 }
 
-#comment_text {
-    float: left;
-    width: 100%;
-    position: relative;
-    padding: 0.5em;
+.comment_footer_delete {
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-.comment_card {
-    box-sizing: border-box;
-    width: 100%;
+.comment_footer_delete:hover {
+    color: red;
 }
-
-.comment_card span {
-    float: left;
-    padding: 0.5em;
-}
-
-.test {
-    width: 100%;
-    position: relative;
-}
-

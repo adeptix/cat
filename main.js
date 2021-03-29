@@ -1,24 +1,43 @@
-const commentZone = document.querySelector('.wrapper')
+const templateComment = document.querySelector('#comment_tmpl').content
+const deleteBtn = templateComment.querySelector('.comment_footer_delete')
 
-const templateComm = document.querySelector('#comment_tmpl').content
-const authorSpan = templateComm.querySelector("#comment_author")
-const createdAtSpan = templateComm.querySelector("#comment_created_at")
-const commentDiv = templateComm.querySelector("#comment_text")
+class CommentHandler {
+    constructor() {
+        this.store = new Store()
 
-class Comment {
-    constructor(text, author, createdAt) {
-        this.text = text
-        this.author = author
-        this.createdAt = createdAt
+        this.commentZone = document.querySelector('.wrapper')
+
+        //comment template
+
+        this.authorText = templateComment.querySelector('.comment_author')
+        this.createdAtText = templateComment.querySelector('.comment_created_at')
+        this.commentText = templateComment.querySelector('.comment_text')
+        this.commentPost = templateComment.querySelector('.comment_post')
     }
 
-    show() {
-        authorSpan.textContent = this.author
-        createdAtSpan.textContent = this.createdAt
-        commentDiv.textContent = this.text
 
-        let cmt = templateComm.cloneNode(true);
-        commentZone.append(cmt)
+    //create and save
+    create(text, author) {
+        let createdAt = new Date()
+        let id = this.store.lastID
+
+        let commentObj = {id, text, author, createdAt}
+        this.store.add(commentObj)
+        this.show(commentObj)
+    }
+
+    show(commentObj) {
+        this.commentPost.id = commentObj.id
+        this.authorText.textContent = commentObj.author
+        this.createdAtText.textContent = commentObj.createdAt
+        this.commentText.textContent = commentObj.text
+
+        deleteBtn.addEventListener('click', event => {
+            console.log(event.target.parentNode.parentNode)
+        })
+
+        let cmt = templateComment.cloneNode(true);
+        this.commentZone.append(cmt)
     }
 
     edit() {
@@ -30,17 +49,16 @@ class Comment {
     }
 }
 
+
 const COM_KEY = 'comments'
 
 class Store {
     savedComments = []
 
     constructor() {
-        console.log(COM_KEY)
-
         let savedComments = JSON.parse(localStorage.getItem(COM_KEY))
         if (savedComments != null) {
-            savedComments.forEach(sc => this.savedComments.push(new Comment(sc.text, sc.author, sc.createdAt)))
+            this.savedComments = savedComments
         }
     }
 
@@ -48,8 +66,16 @@ class Store {
         return this.savedComments
     }
 
-    restoreComments() {
-        this.savedComments.forEach(c => c.show())
+    get lastID() {
+        let lastID = -1;
+        this.savedComments.forEach(c => {
+            let id = c.id.substring(1)
+            if (id > lastID) {
+                lastID = id
+            }
+        })
+
+        return `c${++lastID}`
     }
 
     edit() {
@@ -58,7 +84,6 @@ class Store {
 
     add(comment) {
         this.savedComments.push(comment)
-        console.log(this.savedComments.type)
         localStorage.setItem(COM_KEY, JSON.stringify(this.savedComments))
     }
 
@@ -67,26 +92,26 @@ class Store {
     }
 }
 
+const ch = new CommentHandler()
 const textArea = document.getElementById('comment_add_area')
-const button = document.querySelector('button')
 
-button.addEventListener('click', addComment)
+function initClickListeners() {
+    const button = document.querySelector('button')
+    button.addEventListener('click', () => {
+        let text = textArea.value
 
-const store = new Store()
-store.restoreComments()
+        if (text === "") {
+            return
+        }
 
-function addComment() {
-    let text = textArea.value
+        ch.create(text, "not me")
 
-    if (text === "") {
-        return
-    }
+        textArea.value = ''
+    })
 
-    let now = new Date();
-    let comment = new Comment(text, 'me', now)
-    comment.show()
-    store.add(comment)
+    const editBtn = templateComment.querySelector('.comment_footer_edit')
 
-    textArea.value = ''
+
 }
 
+initClickListeners()
