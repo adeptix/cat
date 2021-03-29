@@ -5,14 +5,21 @@ class CommentHandler {
     constructor() {
         this.store = new Store()
 
-        this.commentZone = document.querySelector('.wrapper')
+        this.commentSection = document.querySelector('.comment_section')
 
         //comment template
-
         this.authorText = templateComment.querySelector('.comment_author')
         this.createdAtText = templateComment.querySelector('.comment_created_at')
         this.commentText = templateComment.querySelector('.comment_text')
         this.commentPost = templateComment.querySelector('.comment_post')
+
+        this.dateFormatter = new Intl.DateTimeFormat('ru', {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric', second: 'numeric',
+            hour12: false
+        })
+
+        this.commentCounter = document.querySelector('.comment_list_head div')
     }
 
 
@@ -24,21 +31,19 @@ class CommentHandler {
         let commentObj = {id, text, author, createdAt}
         this.store.add(commentObj)
         this.show(commentObj)
+        this.commentCounter.textContent = `Комментарии (${this.store.count})`
     }
 
     show(commentObj) {
         this.commentPost.id = commentObj.id
         this.authorText.textContent = commentObj.author
-        this.createdAtText.textContent = commentObj.createdAt
+        this.createdAtText.textContent = this.dateFormatter.format(commentObj.createdAt)
         this.commentText.textContent = commentObj.text
 
-        deleteBtn.addEventListener('click', event => {
-            console.log(event.target.parentNode.parentNode)
-        })
-
         let cmt = templateComment.cloneNode(true);
-        this.commentZone.append(cmt)
+        this.commentSection.append(cmt)
     }
+
 
     edit() {
 
@@ -66,10 +71,14 @@ class Store {
         return this.savedComments
     }
 
+    get count(){
+        return this.savedComments.length
+    }
+
     get lastID() {
         let lastID = -1;
         this.savedComments.forEach(c => {
-            let id = c.id.substring(1)
+            let id = parseInt(c.id.substring(1), 10)
             if (id > lastID) {
                 lastID = id
             }
@@ -94,24 +103,29 @@ class Store {
 
 const ch = new CommentHandler()
 const textArea = document.getElementById('comment_add_area')
+const authorArea = document.getElementById('comment_author_add_area')
 
 function initClickListeners() {
     const button = document.querySelector('button')
     button.addEventListener('click', () => {
         let text = textArea.value
+        let author = authorArea.value
 
-        if (text === "") {
+        if (text === "" || author === "") {
             return
         }
 
-        ch.create(text, "not me")
+        ch.create(text, author)
 
         textArea.value = ''
+        authorArea.value = ''
     })
 
     const editBtn = templateComment.querySelector('.comment_footer_edit')
+}
 
-
+function deleteCommentAction(e) {
+    console.log(e.target)
 }
 
 initClickListeners()

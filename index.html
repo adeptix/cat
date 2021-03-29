@@ -17,17 +17,28 @@
     </p>
 
     <div class="news__comment_add">
-        <textarea name="" id="comment_add_area" rows="5" placeholder="Ваш комментарий"></textarea>
+        <div class="news_comment_areas">
+            <textarea id="comment_author_add_area" rows="1" placeholder="Хто я?"></textarea>
+            <textarea id="comment_add_area" rows="5" placeholder="Ваш комментарий"></textarea>
+        </div>
         <button>
             Добавить
         </button>
     </div>
 
+    <div class="comment_list_head">
+        <div>Комментарии</div>
+        <button>Сортировка по: убыванию</button>
+    </div>
+    <div class="line"></div>
+
+    <div class="comment_section"></div>
+
 </div>
 
 
 <template id="comment_tmpl">
-    <li class="comment_post">
+    <div class="comment_post">
         <div class="comment_header">
             <span class="comment_author"></span>
             <span>&#9757</span>
@@ -35,10 +46,10 @@
         </div>
         <div class="comment_text"></div>
         <div class="comment_footer">
-            <span class="comment_footer_edit">Редактировать</span>
-            <span class="comment_footer_delete">Удалить</span>
+            <button class="comment_footer_edit">Редактировать</button>
+            <button class="comment_footer_delete">Удалить</button>
         </div>
-    </li>
+    </div>
 </template>
 
 <script src="main.js"></script>

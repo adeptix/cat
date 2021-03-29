@@ -52,18 +52,44 @@ video {
     background-color: lightgray;
 }
 
+.line {
+    width: 100%;
+    height: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: lightgray;
+}
+
+.comment_list_head {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.comment_list_head div {
+
+}
+
+
+.news_comment_areas {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
 .news__comment_add {
     width: 100%;
     display: flex;
     align-items: flex-start;
+    flex-direction: row;
     margin-top: 1.5em;
-    position: relative;
     margin-bottom: 1em;
 }
 
-.news__comment_add textarea {
-    flex: 1 0 auto;
+.news_comment_areas textarea {
     margin-right: 1.5em;
+    margin-bottom: 1em;
     font-family: 'Montserrat', sans-serif;
     padding: 1em;
     box-sizing: border-box;
@@ -88,6 +114,14 @@ video {
     background-color: rgb(241, 136, 124);
 }
 
+.comment_section {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-top: 25px;
+}
+
 .comment_author {
     color: blue;
     font-weight: 700;
@@ -103,42 +137,36 @@ video {
 }
 
 .comment_post {
-    clear: both;
-    box-sizing: border-box;
-    list-style-type: none;
-    width: 100%;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 24px;
-    position: relative;
 }
 
 .comment_header {
     line-height: 1;
     font-size: 15px;
-    padding-right: 46px;
     margin-bottom: 3px;
 }
 
 .comment_footer {
     margin-top: 5px;
     line-height: 1;
-    font-size: 10px;
     margin-bottom: 3px;
-    color: dimgrey;
-
-}
-
-.comment_footer_edit {
-    margin-right: 10px;
-    cursor: pointer;
 }
 
 .comment_footer_edit:hover {
     color: blue;
 }
 
-.comment_footer_delete {
-    margin-right: 10px;
+.comment_footer button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 12px;
     cursor: pointer;
+    margin-right: 22px;
+    color: dimgrey;
 }
 
 .comment_footer_delete:hover {
