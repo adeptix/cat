@@ -78,6 +78,11 @@ video {
     flex-direction: column;
 }
 
+.news_comment_btn {
+    display: flex;
+    flex-direction: column;
+}
+
 .news__comment_add {
     width: 100%;
     display: flex;
@@ -171,4 +176,9 @@ video {
 
 .comment_footer_delete:hover {
     color: red;
+}
+
+#cancel_btn {
+    margin-top: 30px;
+    visibility: hidden;
 }
